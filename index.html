@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>王小明 | Software Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #0a0f1e;
+      color: #e8edf5;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── Navigation ── */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 3rem;
+      border-bottom: 0.5px solid rgba(255,255,255,0.08);
+      background: rgba(10,15,30,0.95);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(8px);
+    }
+
+    .nav-logo {
+      font-family: 'DM Mono', monospace;
+      font-size: 14px;
+      color: #5b8dee;
+      letter-spacing: 0.08em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      color: rgba(232,237,245,0.55);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: #e8edf5; }
+
+    /* ── Hero ── */
+    .hero {
+      min-height: 88vh;
+      display: flex;
+      align-items: center;
+      padding: 4rem 3rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 4rem;
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      align-items: center;
+    }
+
+    .hero-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: #5b8dee;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 32px;
+      height: 1px;
+      background: #5b8dee;
+    }
+
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 5vw, 4.2rem);
+      font-weight: 700;
+      line-height: 1.1;
+      color: #f0f4fc;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-title {
+      font-family: 'DM Mono', monospace;
+      font-size: 15px;
+      color: #5b8dee;
+      margin-bottom: 1.5rem;
+      min-height: 1.5em;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1em;
+      background: #5b8dee;
+      margin-left: 2px;
+      vertical-align: text-bottom;
+      animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .hero-desc {
+      font-size: 15px;
+      line-height: 1.8;
+      color: rgba(232,237,245,0.65);
+      max-width: 500px;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: #5b8dee;
+      color: #0a0f1e;
+      border: none;
+      padding: 0.75rem 1.75rem;
+      border-radius: 4px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      letter-spacing: 0.05em;
+      transition: background 0.2s, transform 0.15s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-primary:hover { background: #7ba4f5; transform: translateY(-1px); }
+
+    .btn-outline {
+      background: transparent;
+      color: rgba(232,237,245,0.7);
+      border: 0.5px solid rgba(255,255,255,0.2);
+      padding: 0.75rem 1.75rem;
+      border-radius: 4px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      cursor: pointer;
+      letter-spacing: 0.05em;
+      transition: border-color 0.2s, color 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-outline:hover { border-color: rgba(91,141,238,0.6); color: #e8edf5; }
+
+    /* ── Avatar Card ── */
+    .avatar-card {
+      background: linear-gradient(145deg, rgba(91,141,238,0.12), rgba(255,255,255,0.04));
+      border: 0.5px solid rgba(91,141,238,0.2);
+      border-radius: 12px;
+      padding: 2.5rem 2rem;
+      text-align: center;
+    }
+
+    .avatar-circle {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #5b8dee, #3a5fc4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.25rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 36px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .avatar-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      color: #f0f4fc;
+      margin-bottom: 4px;
+    }
+
+    .avatar-role {
+      font-size: 12px;
+      color: rgba(232,237,245,0.5);
+      letter-spacing: 0.08em;
+      margin-bottom: 1.5rem;
+    }
+
+    .avatar-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .stat-box {
+      background: rgba(255,255,255,0.04);
+      border: 0.5px solid rgba(255,255,255,0.07);
+      border-radius: 6px;
+      padding: 0.75rem 0.5rem;
+    }
+
+    .stat-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 20px;
+      font-weight: 500;
+      color: #5b8dee;
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 10px;
+      color: rgba(232,237,245,0.4);
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+    }
+
+    /* ── Sections ── */
+    section {
+      padding: 5rem 3rem;
+    }
+
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 3rem;
+    }
+
+    .section-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: #5b8dee;
+      letter-spacing: 0.1em;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #f0f4fc;
+    }
+
+    .section-line {
+      flex: 1;
+      height: 0.5px;
+      background: rgba(255,255,255,0.08);
+    }
+
+    /* ── About ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .about-text p {
+      font-size: 15px;
+      line-height: 1.9;
+      color: rgba(232,237,245,0.7);
+      margin-bottom: 1rem;
+    }
+
+    .about-text p strong {
+      color: #e8edf5;
+      font-weight: 500;
+    }
+
+    .about-details {
+      background: rgba(255,255,255,0.03);
+      border: 0.5px solid rgba(255,255,255,0.07);
+      border-radius: 10px;
+      padding: 1.5rem;
+    }
+
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 0;
+      border-bottom: 0.5px solid rgba(255,255,255,0.06);
+      font-size: 13px;
+    }
+
+    .detail-row:last-child { border-bottom: none; }
+
+    .detail-label {
+      color: rgba(232,237,245,0.4);
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .detail-value { color: #e8edf5; }
+
+    .detail-link { color: #5b8dee; text-decoration: none; }
+    .detail-link:hover { text-decoration: underline; }
+
+    .status-dot {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #4caf87;
+      margin-right: 6px;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    /* ── Skills ── */
+    .skills-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+    }
+
+    .skill-category h3 {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: #5b8dee;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 0.5px solid rgba(91,141,238,0.2);
+    }
+
+    .skill-item { margin-bottom: 1rem; }
+
+    .skill-meta {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+
+    .skill-name {
+      font-size: 13px;
+      color: rgba(232,237,245,0.8);
+    }
+
+    .skill-pct {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: rgba(91,141,238,0.7);
+    }
+
+    .skill-bar-bg {
+      height: 3px;
+      background: rgba(255,255,255,0.07);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .skill-bar-fill {
+      height: 100%;
+      background: #5b8dee;
+      border-radius: 2px;
+      width: 0;
+      transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .tech-tags { margin-top: 2.5rem; }
+
+    .tech-tags-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: rgba(232,237,245,0.4);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    .tags-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      background: rgba(91,141,238,0.1);
+      border: 0.5px solid rgba(91,141,238,0.25);
+      color: rgba(91,141,238,0.85);
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      padding: 5px 12px;
+      border-radius: 3px;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 0.5px solid rgba(255,255,255,0.06);
+      padding: 2rem 3rem;
+      text-align: center;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: rgba(232,237,245,0.25);
+      letter-spacing: 0.08em;
+    }
+
+    /* ── Animations ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .delay-1 { transition-delay: 0.1s; }
+    .delay-2 { transition-delay: 0.2s; }
+    .delay-3 { transition-delay: 0.3s; }
+
+    /* ── Responsive ── */
+    @media (max-width: 860px) {
+      nav { padding: 1rem 1.5rem; }
+
+      .hero { padding: 3rem 1.5rem; }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      .avatar-card { max-width: 320px; margin: 0 auto; }
+
+      section { padding: 3.5rem 1.5rem; }
+
+      .about-grid { grid-template-columns: 1fr; }
+
+      .skills-container { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      .nav-links { display: none; }
+      .hero-name { font-size: 2.4rem; }
+      .section-title { font-size: 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <span class="nav-logo">{ dev.portfolio }</span>
+    <ul class="nav-links">
+      <li><a href="#about">關於我</a></li>
+      <li><a href="#skills">技能</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-eyebrow fade-in">軟體工程師</div>
+        <h1 class="hero-name fade-in delay-1">你好，我是<br>王小明</h1>
+        <div class="hero-title fade-in delay-2">
+          <span id="typewriter"></span><span class="cursor"></span>
+        </div>
+        <p class="hero-desc fade-in delay-2">
+          熱衷於打造高效能、可維護的軟體系統。擅長前後端整合，對系統架構設計與使用者體驗有深入的理解與實踐。
+        </p>
+        <div class="hero-cta fade-in delay-3">
+          <a href="#skills" class="btn-primary">查看我的技能</a>
+          <a href="mailto:ming@example.com" class="btn-outline">聯絡我</a>
+        </div>
+      </div>
+      <div class="avatar-card fade-in delay-2">
+        <div class="avatar-circle">王</div>
+        <div class="avatar-name">王小明</div>
+        <div class="avatar-role">SOFTWARE ENGINEER</div>
+        <div class="avatar-stats">
+          <div class="stat-box">
+            <span class="stat-num">5+</span>
+            <span class="stat-label">年經驗</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-num">30+</span>
+            <span class="stat-label">完成專案</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-num">8</span>
+            <span class="stat-label">技術棧</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-num">3</span>
+            <span class="stat-label">認證</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- About -->
+  <section id="about">
+    <div class="section-inner">
+      <div class="section-header fade-in">
+        <span class="section-num">01</span>
+        <h2 class="section-title">關於我</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="about-grid">
+        <div class="about-text fade-in">
+          <p>我是一位擁有 <strong>5 年以上經驗</strong>的軟體工程師，專注於後端服務開發與系統架構設計。曾參與多個大型電商平台與金融系統的開發，對高並發、高可用性架構有豐富的實戰經驗。</p>
+          <p>在工作中，我重視 <strong>程式碼品質</strong>與團隊協作，習慣透過 Code Review、自動化測試與 CI/CD 確保交付品質。同時也積極參與技術社群，持續學習新技術。</p>
+          <p>目前任職於台灣某科技公司，負責核心交易系統的維護與優化，並持續關注雲端原生架構與 AI 應用的整合。</p>
+        </div>
+        <div class="about-details fade-in delay-1">
+          <div class="detail-row">
+            <span class="detail-label">狀態</span>
+            <span class="detail-value"><span class="status-dot"></span>開放新機會</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">所在地</span>
+            <span class="detail-value">台灣 · 台中</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">經歷</span>
+            <span class="detail-value">5+ 年</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">學歷</span>
+            <span class="detail-value">資訊工程學士</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">語言</span>
+            <span class="detail-value">中文 · 英文</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Email</span>
+            <span class="detail-value">
+              <a href="mailto:ming@example.com" class="detail-link">ming@example.com</a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills">
+    <div class="section-inner">
+      <div class="section-header fade-in">
+        <span class="section-num">02</span>
+        <h2 class="section-title">技能 / 專長</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="skills-container" id="skills-grid">
+        <div class="skill-category fade-in">
+          <h3>後端開發</h3>
+          <div class="skill-item">
+            <div class="skill-meta"><span class="skill-name">Node.js / Express</span><span class="skill-pct">92%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="92"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-meta"><span class="skill-name">Python / Django</span><span class="skill-pct">85%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="85"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-meta"><span class="skill-name">Java / Spring Boot</span><span class="skill-pct">78%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="78"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-meta"><span class="skill-name">RESTful API 設計</span><span class="skill-pct">95%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="95"></div></div>
+          </div>
+        </div>
+
+        <div class="skill-category fade-in delay-1">
+          <h3>前端開發</h3>
+          <div class="skill-item">
+            <div class="skill-meta"><span class="skill-name">React / Next.js</span><span class="skill-pct">88%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="88"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-meta"><span class="skill-name">TypeScript</span><span class="skill-pct">82%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="82"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-meta"><span class="skill-name">Vue.js</span><span class="skill-pct">70%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="70"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-meta"><span class="skill-name">HTML / CSS / SASS</span><span class="skill-pct">90%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="90"></div></div>
+          </div>
+        </div>
+
+        <div class="skill-category fade-in delay-2">
+          <h3>雲端 / DevOps</h3>
+          <div class="skill-item">
+            <div class="skill-meta"><span class="skill-name">AWS / GCP</span><span class="skill-pct">80%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="80"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-meta"><span class="skill-name">Docker / Kubernetes</span><span class="skill-pct">75%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="75"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-meta"><span class="skill-name">CI/CD Pipeline</span><span class="skill-pct">85%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="85"></div></div>
+          </div>
+        </div>
+
+        <div class="skill-category fade-in delay-3">
+          <h3>資料庫 / 其他</h3>
+          <div class="skill-item">
+            <div class="skill-meta"><span class="skill-name">PostgreSQL / MySQL</span><span class="skill-pct">88%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="88"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-meta"><span class="skill-name">Redis / MongoDB</span><span class="skill-pct">80%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="80"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-meta"><span class="skill-name">系統架構設計</span><span class="skill-pct">82%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="82"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tech-tags fade-in">
+        <div class="tech-tags-label">技術標籤</div>
+        <div class="tags-wrap">
+          <span class="tag">Git</span>
+          <span class="tag">Linux</span>
+          <span class="tag">Nginx</span>
+          <span class="tag">GraphQL</span>
+          <span class="tag">Microservices</span>
+          <span class="tag">Agile / Scrum</span>
+          <span class="tag">TDD</span>
+          <span class="tag">WebSocket</span>
+          <span class="tag">RabbitMQ</span>
+          <span class="tag">Terraform</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    © 2026 王小明 · SOFTWARE ENGINEER · TAICHUNG, TAIWAN
+  </footer>
+
+  <script>
+    // ── Typewriter Effect ──
+    const phrases = [
+      'Full-Stack Developer',
+      'Backend Specialist',
+      'System Architect',
+      'Cloud Enthusiast'
+    ];
+    let phraseIndex = 0, charIndex = 0, deleting = false;
+    const typeEl = document.getElementById('typewriter');
+
+    function type() {
+      const word = phrases[phraseIndex];
+      if (!deleting) {
+        typeEl.textContent = word.slice(0, charIndex + 1);
+        charIndex++;
+        if (charIndex === word.length) {
+          deleting = true;
+          setTimeout(type, 1800);
+          return;
+        }
+      } else {
+        typeEl.textContent = word.slice(0, charIndex - 1);
+        charIndex--;
+        if (charIndex === 0) {
+          deleting = false;
+          phraseIndex = (phraseIndex + 1) % phrases.length;
+        }
+      }
+      setTimeout(type, deleting ? 60 : 90);
+    }
+    type();
+
+    // ── Scroll Fade-in + Skill Bars ──
+    let skillsAnimated = false;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Skill bar trigger via separate observer
+    const skillsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !skillsAnimated) {
+          skillsAnimated = true;
+          document.querySelectorAll('.skill-bar-fill').forEach(bar => {
+            bar.style.width = bar.dataset.width + '%';
+          });
+        }
+      });
+    }, { threshold: 0.2 });
+
+    const skillsGrid = document.getElementById('skills-grid');
+    if (skillsGrid) skillsObserver.observe(skillsGrid);
+
+    // Auto-trigger hero fade-ins on load
+    window.addEventListener('load', () => {
+      document.querySelectorAll('.hero .fade-in').forEach(el => {
+        setTimeout(() => el.classList.add('visible'), 100);
+      });
+    });
+  </script>
+</body>
+</html>
